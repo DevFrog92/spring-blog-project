@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>블로그 글</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="p-5 mb-5 text-center bg-light">
+    <h1 class="mb-3" th:onclick="|location.href = '@{/articles}'|">My Blog</h1>
+    <h4 class="mb-3">Welcome to My Blog</h4>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <article>
+          <input type="hidden" id="articleId" th:value="${article.id}" />
+        <header class="mb-4">
+          <h1 class="fw-bolder mb-1" th:text="${article.title}"></h1>
+          <div class="text-muted fst-italic mb-2" th:text="|Psted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}|"></div>
+        </header>
+        <section class="mb-5">
+            <p class="fs-5 mb-4" th:text="${article.content}"></p>
+        </section>
+        <button type="button" class="btn bnt-primary btn-sm" th:onclick="|location.href = '@{/articles/{id}/edit(id=${article.id})}'|">edit</button>
+        <button type="button" class="btn bnt-secondary btn-sm delete-btn">delete</button>
+      </article>
+    </div>
+  </div>
+</div>
+<script src="/js/article.js"></script>
+</body>
+</html>

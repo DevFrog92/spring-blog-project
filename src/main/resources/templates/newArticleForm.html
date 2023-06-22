@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>블로그 글 생성</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="p-5 mb-5 text-center bg-light">
+  <h1 class="mb-3" th:onclick="|location.href = '@{/articles}'|">My Blog</h1>
+  <h4 class="mb-3">Welcome to My Blog</h4>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-8">
+      <article>
+        <header class="mb-4">
+          <input type="text" class="form-control" placeholder="제목" id="title" th:value="${article.title}"/>
+        </header>
+        <section class="mb-5">
+          <textarea class="form-control h-25" rows="10" placeholder="내용" th:text="${article.content}" id="content"></textarea>
+        </section>
+        <button type="button" class="btn bnt-primary btn-sm create-btn">등록</button>
+      </article>
+    </div>
+  </div>
+  <script src="/js/articleCreateForm.js"></script>
+</div>
+</body>
+</html>
