@@ -26,7 +26,7 @@ public class BlogViewController {
                 .toList();
 
         // TODO: pagination
-        
+
         model.addAttribute("articles", articles);
         return "articleList";
     }
