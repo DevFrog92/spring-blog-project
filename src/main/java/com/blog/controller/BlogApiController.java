@@ -8,6 +8,8 @@ import com.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +21,15 @@ public class BlogApiController {
     private final BlogService blogService;
 
     @PostMapping
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
+    public ResponseEntity<Object> addArticle(
+            @RequestBody @Validated AddArticleRequest request,
+            BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                   .body(bindingResult.getAllErrors());
+        }
+
         Article savedArticle = blogService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedArticle);
